@@ -24,7 +24,7 @@ App = {
         // Request account access if needed
         await ethereum.enable()
         // Acccounts now exposed
-        web3.eth.sendTransaction({/* ... */})
+        web3.eth.sendTransaction({/* ... */ })
       } catch (error) {
         // User denied account access...
       }
@@ -34,7 +34,7 @@ App = {
       App.web3Provider = web3.currentProvider
       window.web3 = new Web3(web3.currentProvider)
       // Acccounts always exposed
-      web3.eth.sendTransaction({/* ... */})
+      web3.eth.sendTransaction({/* ... */ })
     }
     // Non-dapp browsers...
     else {
@@ -44,7 +44,7 @@ App = {
 
   loadAccount: async () => {
     // Set the current blockchain account
-    web3.eth.defaultAccount=web3.eth.accounts[0]
+    web3.eth.defaultAccount = web3.eth.accounts[0]
   },
 
   loadContract: async () => {
@@ -67,10 +67,10 @@ App = {
     App.setLoading(true)
 
     // Render Account
-    $('#account').html(App.account)
+    $('#account').html(web3.eth.defaultAccount)
 
     // Render Tasks
-    await App.renderTasks()
+    //await App.renderTasks()
 
     // Update loading state
     App.setLoading(false)
@@ -86,22 +86,46 @@ App = {
       // Fetch the task data from the blockchain
       const task = await App.todoList.tasks(i)
       const taskId = task[0].toNumber()
-      const taskContent = task[1]
-      const taskCompleted = task[2]
+      const name = task[1]
+      const father = task[2]
+      const mother = task[3]
+      const bloodg = task[4]
+
+      const age = task[5].toNumber()
+      const weight = task[6].toNumber()
+      const height = task[7].toNumber()
+
+      const gender = task[8]
+      const state = task[9]
 
       // Create the html for the task
       const $newTaskTemplate = $taskTemplate.clone()
-      $newTaskTemplate.find('.content').html(taskContent)
+      $newTaskTemplate.find('.taskId').html(taskId)
+      $newTaskTemplate.find('.contentname').html(name)
+      $newTaskTemplate.find('.contentfather').html(father)
       $newTaskTemplate.find('input')
-                      .prop('name', taskId)
-                      .prop('checked', taskCompleted)
-                      .on('click', App.toggleCompleted)
+        .prop('name', taskId)
+        .prop('checked', state)
+        .on('click', App.toggleCompleted)
 
-      // Put the task in the correct list
-      if (taskCompleted) {
+      //Put the task in the correct list
+      if (state) {
         $('#completedTaskList').append($newTaskTemplate)
       } else {
-        $('#taskList').append($newTaskTemplate)
+        markup = "<tr>" + 
+          "<td>" + taskId + "</td>" +
+          "<td>" + name + "</td>" +
+          "<td>" + father + "</td>" +
+          "<td>" + mother + "</td>" +
+          "<td>" + bloodg + "</td>" +
+          "<td>" + age + "</td>" +
+          "<td>" + weight + "</td>" +
+          "<td>" + height + "</td>" +
+          "<td>" + gender + "</td>" +
+          + "</tr>";
+        tableBody = $("table tbody");
+        tableBody.append(markup);
+        //$('#taskList').append($newTaskTemplate)
       }
 
       // Show the task
@@ -109,10 +133,56 @@ App = {
     }
   },
 
-  createTask: async () => {
+  retrive: async () => {
+    const retid = $('#retId').val()
+    await App.renderID(retid)
+  },
+
+  renderID: async (retid) => {
+
+    const task = await App.todoList.tasks(retid)
+      const taskId = task[0].toNumber()
+      const name = task[1]
+      const father = task[2]
+      const mother = task[3]
+      const bloodg = task[4]
+
+      const age = task[5].toNumber()
+      const weight = task[6].toNumber()
+      const height = task[7].toNumber()
+
+      const gender = task[8]
+      const state = task[9]
+
+    markup = "<tr>" + 
+          "<td>" + taskId + "</td>" +
+          "<td>" + name + "</td>" +
+          "<td>" + father + "</td>" +
+          "<td>" + mother + "</td>" +
+          "<td>" + bloodg + "</td>" +
+          "<td>" + age + "</td>" +
+          "<td>" + weight + "</td>" +
+          "<td>" + height + "</td>" +
+          "<td>" + gender + "</td>" +
+          + "</tr>";
+        tableBody = $("table tbody");
+        tableBody.append(markup);
+  },  
+
+  createName: async () => {
     App.setLoading(true)
-    const content = $('#newTask').val()
-    await App.todoList.createTask(content)
+    const name = $('#name').val()
+    const father = $('#father').val()
+    const mother = $('#mother').val()
+    const bloodg = $('#bloodg').val()
+
+    const age = $('#age').val()
+    const weight = $('#weight').val()
+    const height = $('#height').val()
+
+    const gender = $('#gender').val()
+    
+    await App.todoList.createTask(name, father, mother, bloodg, age, weight, height, gender)
     window.location.reload()
   },
 

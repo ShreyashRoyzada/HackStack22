@@ -5,16 +5,38 @@ contract TodoList {
 
   struct Task {
     uint id;
-    string content;
+
+    string name;
+    string father;
+    string mother;
+    string bloodg;
+   
+    uint age;
+    uint weight;
+    uint height;
+    
+    bool gender;
     bool completed;
+    
   }
 
   mapping(uint => Task) public tasks;
 
   event TaskCreated(
     uint id,
-    string content,
+
+    string name,
+    string father,
+    string mother,
+    string bloodg,
+
+    uint age,
+    uint weight,
+    uint height,
+    
+    bool gender,
     bool completed
+    
   );
 
   event TaskCompleted(
@@ -23,13 +45,22 @@ contract TodoList {
   );
 
   constructor() public {
-    createTask("Default Task");
+    createTask("Me","Father","Mother","AB+",12,25,100,true);
   }
 
-  function createTask(string memory _content) public {
+  function createTask(string memory _name, 
+                      string memory _father,
+                      string memory _mother,
+                      string memory _bloodg,
+                      uint _age,
+                      uint _weight,
+                      uint _height,
+                      bool _gender
+                      ) public {
+
     taskCount ++;
-    tasks[taskCount] = Task(taskCount, _content, false);
-    emit TaskCreated(taskCount, _content, false);
+    tasks[taskCount] = Task(taskCount, _name, _father, _mother, _bloodg, _age, _weight, _height, _gender, false);
+    emit TaskCreated(taskCount, _name, _father, _mother, _bloodg, _age, _weight, _height, _gender, false);
   }
 
   function toggleCompleted(uint _id) public {
@@ -38,5 +69,4 @@ contract TodoList {
     tasks[_id] = _task;
     emit TaskCompleted(_id, _task.completed);
   }
-
 }
