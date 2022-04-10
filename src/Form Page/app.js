@@ -77,6 +77,23 @@ App = {
     App.setLoading(false)
   },
 
+  returnOTP: async () => {
+    // App.setLoading(true)
+    const phonenumber = $('#otpphone').val()
+
+    console.log(phonenumber)
+    const otp = await App.todoList.otp(phonenumber)
+
+    markup = "<tr>" + 
+          "<td>" + phonenumber + "</td>" +
+          "<td>" + otp + "</td>" 
+          + "</tr>";
+        tableBody = $("table tbody");
+        tableBody.append(markup);
+
+    // window.location.reload()
+  },
+
   renderTasks: async () => {
     // Load the total task count from the blockchain
     const taskCount = await App.todoList.taskCount()
@@ -89,15 +106,15 @@ App = {
       const taskId = task[0].toNumber()
       const name = task[1]
       const father = task[2]
-      const mother = task[3]
-      const bloodg = task[4]
 
-      const age = task[5].toNumber()
-      const weight = task[6].toNumber()
-      const height = task[7].toNumber()
+      const bloodg = task[3]
 
-      const phone = task[8]
-      const gender = task[9]
+      const age = task[4].toNumber()
+      const weight = task[5].toNumber()
+      const height = task[6].toNumber()
+
+      const phone = task[7]
+      const gender = task[8]
 
       // Create the html for the task
       const $newTaskTemplate = $taskTemplate.clone()
@@ -115,7 +132,6 @@ App = {
           "<td>" + taskId + "</td>" +
           "<td>" + name + "</td>" +
           "<td>" + father + "</td>" +
-          "<td>" + mother + "</td>" +
           "<td>" + bloodg + "</td>" +
           "<td>" + age + "</td>" +
           "<td>" + weight + "</td>" +
@@ -146,21 +162,20 @@ App = {
       const taskId = task[0].toNumber()
       const name = task[1]
       const father = task[2]
-      const mother = task[3]
-      const bloodg = task[4]
 
-      const age = task[5].toNumber()
-      const weight = task[6].toNumber()
-      const height = task[7].toNumber()
+      const bloodg = task[3]
 
-      const phone = task[8]
-      const gender = task[9]
+      const age = task[4].toNumber()
+      const weight = task[5].toNumber()
+      const height = task[6].toNumber()
+
+      const phone = task[7]
+      const gender = task[8]
 
     markup = "<tr>" + 
           "<td>" + taskId + "</td>" +
           "<td>" + name + "</td>" +
           "<td>" + father + "</td>" +
-          "<td>" + mother + "</td>" +
           "<td>" + bloodg + "</td>" +
           "<td>" + age + "</td>" +
           "<td>" + weight + "</td>" +
@@ -177,7 +192,6 @@ App = {
     App.setLoading(true)
     const name = $('#name').val()
     const father = $('#father').val()
-    const mother = $('#mother').val()
     const bloodg = $('#bloodg').val()
 
     const age = $('#age').val()
@@ -187,7 +201,7 @@ App = {
 
     const gender = $('#gender').val()
     
-    await App.todoList.createTask(name, father, mother, bloodg, age, weight, height,phone, gender)
+    await App.todoList.createTask(name, father, bloodg, age, weight, height,phone, gender)
     window.location.reload()
   },
 

@@ -3,12 +3,23 @@ pragma solidity ^0.5.0;
 contract TodoList {
   uint public taskCount = 0;
 
+  //Random Number generator
+  uint randNonce = 0;
+  function randMod(uint _modulus) internal returns(uint)
+  {
+    // increase nonce
+    randNonce++; 
+    return uint(keccak256(abi.encodePacked(now,
+                                            msg.sender,
+                                            randNonce))) % _modulus;
+  }
+
   struct Task {
     uint id;
 
     string name;
     string father;
-    string mother;
+    
     string bloodg;
    
     uint age;
@@ -22,13 +33,13 @@ contract TodoList {
   }
 
   mapping(uint => Task) public tasks;
+  mapping(uint => uint) public otp;
 
   event TaskCreated(
     uint id,
-
+    
     string name,
     string father,
-    string mother,
     string bloodg,
 
     uint age,
@@ -50,7 +61,7 @@ contract TodoList {
   );
 
   constructor() public {
-    createTask("Me","Father","Mother","AB+",12,25,100,9259259259,"M");
+    createTask("Me","Father","AB+",12,25,100,9879879879,"M");
   }
 
   function retTask(uint _id) public {
@@ -58,9 +69,9 @@ contract TodoList {
      
   }
 
+
   function createTask(string memory _name, 
                       string memory _father,
-                      string memory _mother,
                       string memory _bloodg,
                       uint _age,
                       uint _weight,
@@ -70,8 +81,10 @@ contract TodoList {
                       ) public {
 
     taskCount ++;
-    tasks[taskCount] = Task(taskCount, _name, _father, _mother, _bloodg, _age, _weight, _height, _phone, _gender);
-    emit TaskCreated(taskCount, _name, _father, _mother, _bloodg, _age, _weight, _height, _phone, _gender);
+    uint rand = randMod(100);
+    otp[_phone] = rand;
+    tasks[rand] = Task(taskCount, _name, _father,  _bloodg, _age, _weight, _height, _phone, _gender);
+    emit TaskCreated(taskCount, _name, _father,  _bloodg, _age, _weight, _height, _phone, _gender);
   }
 
   // function toggleCompleted(uint _id) public {

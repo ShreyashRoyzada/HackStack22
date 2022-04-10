@@ -59,43 +59,25 @@
           <p class="text-center">Loading...</p>
         </div>
         <div id="content">
-          <!-- <form onSubmit="App.createName(); return false;">
-            Your Name: <input id="name" type="text" class="form-control" placeholder="Add Name..." required>
-            Father's Name: <input id="father" type="text" class="form-control" placeholder="Add Father's Name..." required>
-            Mother's Name: <input id="mother" type="text" class="form-control" placeholder="Add Mother's Name..." required>
-            Blood Group: <input id="bloodg" type="text" class="form-control" placeholder="Add Blood Group..." required>
-            
-            Age: <input id="age" type="int" class="form-control" placeholder="Add Age..." required>
-            Weight(in Kg): <input id="weight" type="int" class="form-control" placeholder="Add Weight..." required>
-            Height(in cm): <input id="height" type="int" class="form-control" placeholder="Add Height..." required>
-            
-            Gender(M/F): <input id="gender" type="text" class="form-control" placeholder="Add Gender..." required>
-
-            
-            
-            
-            <input type="submit">
-          </form> -->
-
-          <form onSubmit="App.retrive(); return false;">
-            Enter required ID: <input id="retId" type="int" class="form-control" placeholder="Enter Required ID..." required>
+          <form onSubmit="App.returnOTP(); return false;">
+            Phone Number: <input id="otpphone" type="int" class="form-control" placeholder="Add Number..." required>
+         
             <input type="submit">
           </form>
+
+
+
+          <!-- <form onSubmit="App.retrive(); return false;">
+            Enter required ID: <input id="retId" type="int" class="form-control" placeholder="Enter Required ID..." required>
+            <input type="submit">
+          </form> -->
 
           <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">Serial No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Gaurdian's Name</th>
-                <th scope="col">Blood Group</th>
-
-                <th scope="col">Age</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Height</th>
                 <th scope="col">Phone Number</th>
-
-                <th scope="col">Gender</th>
+                <th scope="col">OTP</th>
+                
               </tr>
             </thead>
 
@@ -119,7 +101,7 @@
 
             <!-- </ul> -->
 
-            <!-- </table> -->
+            </table>
             <!-- <ul id="completedTaskList" class="list-unstyled">
             </ul> -->
         </div>
