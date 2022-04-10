@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Health Record Storage</title>
+
+  <!-- Bootstrap -->
+  <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <style>
+    main {
+      margin-top: 60px;
+    }
+
+    #content {
+      display: none;
+    }
+
+    form {
+      width: 350px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-bottom: 0px;
+    }
+
+    #completedTaskList .content {
+      color: grey;
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-primary fixed-top flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="../index.html" target="">Health Record Storage</a>
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap d-none d-sm-none d-sm-block">
+        <small><a class="nav-link" href="#"><span id="account"></span></a></small>
+      </li>
+    </ul>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <main role="main" class="col-lg-12 d-flex justify-content-center">
+        <div id="loader" class="text-center">
+          <p class="text-center">Loading...</p>
+        </div>
+        <div id="content">
+          <form onSubmit="App.createName(); return false;">
+            Your Name: <input id="name" type="text" class="form-control" placeholder="Add Name..." required>
+            Father's Name: <input id="father" type="text" class="form-control" placeholder="Add Father's Name..." required>
+            Mother's Name: <input id="mother" type="text" class="form-control" placeholder="Add Mother's Name..." required>
+            Blood Group: <input id="bloodg" type="text" class="form-control" placeholder="Add Blood Group..." required>
+            
+            Age: <input id="age" type="int" class="form-control" placeholder="Add Age..." required>
+            Weight(in Kg): <input id="weight" type="int" class="form-control" placeholder="Add Weight..." required>
+            Height(in cm): <input id="height" type="int" class="form-control" placeholder="Add Height..." required>
+            Phone Number: <input id="phone" type="int" class="form-control" placeholder="Add Number..." required>
+            Gender(M/F): <input id="gender" type="text" class="form-control" placeholder="Add Gender..." required>
+
+            
+            
+            
+            <input type="submit">
+          </form>
+
+          <!-- <form onSubmit="App.retrive(); return false;">
+            Enter required ID: <input id="retId" type="int" class="form-control" placeholder="Enter Required ID..." required>
+            <input type="submit">
+          </form> -->
+
+          <!-- <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Serial No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Father's Name</th>
+                <th scope="col">Mother's Name</th>
+                <th scope="col">Blood Group</th>
+
+                <th scope="col">Age</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Height</th>
+
+                <th scope="col">Gender</th>
+              </tr>
+            </thead> -->
+
+
+
+            <!-- <ul id="taskList" class="list-unstyled"> -->
+
+
+
+
+            <!-- <tbody id="taskList">
+              <div class="taskTemplate" class="checkbox" style="display: none">
+                <label>
+                  <tr>
+                  </tr>
+                </label>
+              </div>
+            </tbody> -->
+
+
+
+            <!-- </ul> -->
+
+            <!-- </table> -->
+            <!-- <ul id="completedTaskList" class="list-unstyled">
+            </ul> -->
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../vendor/web3/dist/web3.min.js"></script>
+  <script src="../vendor/truffle-contract/dist/truffle-contract.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

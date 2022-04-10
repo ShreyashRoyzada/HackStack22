@@ -1,6 +1,7 @@
 {
   "server": {
     "baseDir": [
+      "./src/Form Page",
       "./src",
       "./build/contracts"
     ],

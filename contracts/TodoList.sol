@@ -14,9 +14,10 @@ contract TodoList {
     uint age;
     uint weight;
     uint height;
-    
-    bool gender;
-    bool completed;
+    uint phone;
+
+    string gender;
+    // bool completed;
     
   }
 
@@ -33,19 +34,28 @@ contract TodoList {
     uint age,
     uint weight,
     uint height,
-    
-    bool gender,
-    bool completed
+    uint phone,
+
+    string gender
     
   );
 
-  event TaskCompleted(
-    uint id,
-    bool completed
+  // event TaskCompleted(
+  //   uint id,
+  //   bool completed
+  // );
+
+  event taskaccessed(
+    uint id
   );
 
   constructor() public {
-    createTask("Me","Father","Mother","AB+",12,25,100,true);
+    createTask("Me","Father","Mother","AB+",12,25,100,9259259259,"M");
+  }
+
+  function retTask(uint _id) public {
+    emit taskaccessed(_id);
+     
   }
 
   function createTask(string memory _name, 
@@ -55,18 +65,19 @@ contract TodoList {
                       uint _age,
                       uint _weight,
                       uint _height,
-                      bool _gender
+                      uint _phone,
+                      string memory _gender
                       ) public {
 
     taskCount ++;
-    tasks[taskCount] = Task(taskCount, _name, _father, _mother, _bloodg, _age, _weight, _height, _gender, false);
-    emit TaskCreated(taskCount, _name, _father, _mother, _bloodg, _age, _weight, _height, _gender, false);
+    tasks[taskCount] = Task(taskCount, _name, _father, _mother, _bloodg, _age, _weight, _height, _phone, _gender);
+    emit TaskCreated(taskCount, _name, _father, _mother, _bloodg, _age, _weight, _height, _phone, _gender);
   }
 
-  function toggleCompleted(uint _id) public {
-    Task memory _task = tasks[_id];
-    _task.completed = !_task.completed;
-    tasks[_id] = _task;
-    emit TaskCompleted(_id, _task.completed);
-  }
+  // function toggleCompleted(uint _id) public {
+  //   Task memory _task = tasks[_id];
+  //   _task.completed = !_task.completed;
+  //   tasks[_id] = _task;
+  //   emit TaskCompleted(_id, _task.completed);
+  // }
 }

@@ -1,3 +1,4 @@
+
 App = {
   loading: false,
   contracts: {},
@@ -49,7 +50,7 @@ App = {
 
   loadContract: async () => {
     // Create a JavaScript version of the smart contract
-    const todoList = await $.getJSON('TodoList.json')
+    const todoList = await $.getJSON('../TodoList.json')
     App.contracts.TodoList = TruffleContract(todoList)
     App.contracts.TodoList.setProvider(App.web3Provider)
 
@@ -95,8 +96,8 @@ App = {
       const weight = task[6].toNumber()
       const height = task[7].toNumber()
 
-      const gender = task[8]
-      const state = task[9]
+      const phone = task[8]
+      const gender = task[9]
 
       // Create the html for the task
       const $newTaskTemplate = $taskTemplate.clone()
@@ -105,13 +106,11 @@ App = {
       $newTaskTemplate.find('.contentfather').html(father)
       $newTaskTemplate.find('input')
         .prop('name', taskId)
-        .prop('checked', state)
+        .prop('checked', true)
         .on('click', App.toggleCompleted)
 
       //Put the task in the correct list
-      if (state) {
-        $('#completedTaskList').append($newTaskTemplate)
-      } else {
+     
         markup = "<tr>" + 
           "<td>" + taskId + "</td>" +
           "<td>" + name + "</td>" +
@@ -121,12 +120,13 @@ App = {
           "<td>" + age + "</td>" +
           "<td>" + weight + "</td>" +
           "<td>" + height + "</td>" +
+          "<td>" + phone + "</td>" +
           "<td>" + gender + "</td>" +
           + "</tr>";
         tableBody = $("table tbody");
         tableBody.append(markup);
         //$('#taskList').append($newTaskTemplate)
-      }
+      
 
       // Show the task
       $newTaskTemplate.show()
@@ -139,7 +139,9 @@ App = {
   },
 
   renderID: async (retid) => {
-
+    // App.setLoading(true)
+    await App.todoList.retTask(retid)
+    
     const task = await App.todoList.tasks(retid)
       const taskId = task[0].toNumber()
       const name = task[1]
@@ -151,8 +153,8 @@ App = {
       const weight = task[6].toNumber()
       const height = task[7].toNumber()
 
-      const gender = task[8]
-      const state = task[9]
+      const phone = task[8]
+      const gender = task[9]
 
     markup = "<tr>" + 
           "<td>" + taskId + "</td>" +
@@ -163,10 +165,12 @@ App = {
           "<td>" + age + "</td>" +
           "<td>" + weight + "</td>" +
           "<td>" + height + "</td>" +
+          "<td>" + phone + "</td>" +
           "<td>" + gender + "</td>" +
           + "</tr>";
         tableBody = $("table tbody");
         tableBody.append(markup);
+        
   },  
 
   createName: async () => {
@@ -179,10 +183,11 @@ App = {
     const age = $('#age').val()
     const weight = $('#weight').val()
     const height = $('#height').val()
+    const phone = $('#phone').val()
 
     const gender = $('#gender').val()
     
-    await App.todoList.createTask(name, father, mother, bloodg, age, weight, height, gender)
+    await App.todoList.createTask(name, father, mother, bloodg, age, weight, height,phone, gender)
     window.location.reload()
   },
 
