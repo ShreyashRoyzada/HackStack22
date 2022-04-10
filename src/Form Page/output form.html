@@ -10,6 +10,9 @@
 
   <!-- Bootstrap -->
   <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Madurai&display=swap" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,6 +24,7 @@
   <style>
     main {
       margin-top: 60px;
+      padding-top: 60px;
     }
 
     #content {
@@ -40,12 +44,58 @@
       color: grey;
       text-decoration: line-through;
     }
+    body{
+      background: rgb(106,202,250);
+      background: linear-gradient(90deg, rgba(106,202,250,1) 0%, rgba(51,180,250,1) 43%, rgba(0,144,255,1) 88%);
+    }
+    h5{
+      font-family: 'Hind Madurai', sans-serif;
+    }
+    .form-inline {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+    }
+
+    .form-inline label {
+      margin: 5px 10px 5px 0;
+    }
+
+    .form-inline input {
+      vertical-align: middle;
+      margin: 5px 10px 5px 0;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+
+    .form-inline button {
+      padding: 10px 20px;
+      background-color: dodgerblue;
+      border: 1px solid #ddd;
+      color: white;
+    }
+
+    .form-inline button:hover {
+      background-color: royalblue;
+    }
+
+    @media (max-width: 800px) {
+      .form-inline input {
+        margin: 10px 0;
+      }
+
+      .form-inline {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
   </style>
 </head>
 
 <body>
   <nav class="navbar navbar-dark bg-primary fixed-top flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="../index.html" target="">Health Record Storage</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="../index.html" target=""><img src="../img/medlogos.png" alt=""></a>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap d-none d-sm-none d-sm-block">
         <small><a class="nav-link" href="#"><span id="account"></span></a></small>
@@ -59,25 +109,11 @@
           <p class="text-center">Loading...</p>
         </div>
         <div id="content">
-          <!-- <form onSubmit="App.createName(); return false;">
-            Your Name: <input id="name" type="text" class="form-control" placeholder="Add Name..." required>
-            Father's Name: <input id="father" type="text" class="form-control" placeholder="Add Father's Name..." required>
-            Mother's Name: <input id="mother" type="text" class="form-control" placeholder="Add Mother's Name..." required>
-            Blood Group: <input id="bloodg" type="text" class="form-control" placeholder="Add Blood Group..." required>
-            
-            Age: <input id="age" type="int" class="form-control" placeholder="Add Age..." required>
-            Weight(in Kg): <input id="weight" type="int" class="form-control" placeholder="Add Weight..." required>
-            Height(in cm): <input id="height" type="int" class="form-control" placeholder="Add Height..." required>
-            
-            Gender(M/F): <input id="gender" type="text" class="form-control" placeholder="Add Gender..." required>
-
-            
-            
-            
-            <input type="submit">
-          </form> -->
-
-          <form onSubmit="App.retrive(); return false;">
+          <h5>
+            <strong>Enter OTP to get user details. As user to send new OTP if you want information again.</strong>
+           </h5>
+           <div class="jumbotron">
+          <form class="form-inline" onSubmit="App.retrive(); return false;">
             Enter required ID: <input id="retId" type="int" class="form-control" placeholder="Enter Required ID..." required>
             <input type="submit">
           </form>
@@ -87,7 +123,7 @@
               <tr>
                 <th scope="col">Serial No.</th>
                 <th scope="col">Name</th>
-                <th scope="col">Gaurdian's Name</th>
+                <th scope="col">Guardian's Name</th>
                 <th scope="col">Blood Group</th>
 
                 <th scope="col">Age</th>
@@ -115,7 +151,7 @@
               </div>
             </tbody>
 
-
+          </div>
 
             <!-- </ul> -->
 
