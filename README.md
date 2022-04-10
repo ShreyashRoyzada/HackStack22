@@ -1,5 +1,6 @@
 # MedVault
 
+<img src = "LogosMedVault/MedVault.png">
 MedVault is a platform for storing your important Medical Details on the Blockchain for easy access in case of an emergency. 
 The problem we hoped to solve with our project was the situation where a person might face an emergency and he/she must be rushed to the Hospital. Generally, It is 
 imperative to fill out many formalities required by the Hospital before the Treatment started. Apart from this the knowledge of allergies, Past Illnesses, etc. 
