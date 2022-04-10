@@ -82,7 +82,9 @@ App = {
     const phonenumber = $('#otpphone').val()
 
     console.log(phonenumber)
+    
     const otp = await App.todoList.otp(phonenumber)
+    
 
     markup = "<tr>" + 
           "<td>" + phonenumber + "</td>" +
@@ -156,9 +158,11 @@ App = {
 
   renderID: async (retid) => {
     // App.setLoading(true)
-    await App.todoList.retTask(retid)
+    const otp = await App.todoList.mid(retid)
+    // await App.todoList.retTask(otp)
     
-    const task = await App.todoList.tasks(retid)
+    console.log(otp)
+    const task = await App.todoList.tasks(otp)
       const taskId = task[0].toNumber()
       const name = task[1]
       const father = task[2]
@@ -172,6 +176,7 @@ App = {
       const phone = task[7]
       const gender = task[8]
 
+    await App.todoList.changeOTP(retid)
     markup = "<tr>" + 
           "<td>" + taskId + "</td>" +
           "<td>" + name + "</td>" +

@@ -34,6 +34,7 @@ contract TodoList {
 
   mapping(uint => Task) public tasks;
   mapping(uint => uint) public otp;
+  mapping(uint => uint) public mid;
 
   event TaskCreated(
     uint id,
@@ -66,9 +67,19 @@ contract TodoList {
 
   function retTask(uint _id) public {
     emit taskaccessed(_id);
-     
   }
 
+  function changeOTP(uint _currotp) public{
+    
+    uint newotp = randMod(10000);
+    uint keyval = mid[_currotp];
+    mid[_currotp] = 0;
+    mid[newotp] = keyval;
+    
+    Task memory t = tasks[keyval];
+    uint _phonenumber = t.phone;
+    otp[_phonenumber] = newotp;
+  }
 
   function createTask(string memory _name, 
                       string memory _father,
@@ -81,9 +92,11 @@ contract TodoList {
                       ) public {
 
     taskCount ++;
-    uint rand = randMod(100);
-    otp[_phone] = rand;
-    tasks[rand] = Task(taskCount, _name, _father,  _bloodg, _age, _weight, _height, _phone, _gender);
+    uint key = randMod(100);
+    uint otp2 = randMod(10000);
+    mid[otp2] = key;
+    otp[_phone] = otp2;
+    tasks[key] = Task(taskCount, _name, _father,  _bloodg, _age, _weight, _height, _phone, _gender);
     emit TaskCreated(taskCount, _name, _father,  _bloodg, _age, _weight, _height, _phone, _gender);
   }
 
